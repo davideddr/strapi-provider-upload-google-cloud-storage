@@ -8,15 +8,38 @@ published on npm as
 It is not affiliated with, endorsed by or supported by Strapi Community, Strapi Inc. or VirtusLab.
 The original copyright notices are retained in [LICENSE](LICENSE).
 
+## Status: temporary workaround
+
+This fork is not intended to be a permanent alternative to the upstream provider. It will be
+deprecated once upstream publishes a release that includes Node.js 24/26 support, and users should
+then switch back to
+[`@strapi-community/strapi-provider-upload-google-cloud-storage`](https://www.npmjs.com/package/@strapi-community/strapi-provider-upload-google-cloud-storage).
+
 ## Why this fork exists
 
-The fork is used in a private Strapi project and is published under its own npm scope so that the
-dependency is explicit and independent from the upstream release cycle. The provider implementation
-is kept as close as possible to upstream; the differences are packaging, metadata, documentation and
-release automation.
+The fork is a temporary workaround for the Node.js engine range declared by the published upstream
+package.
+
+Upstream `@strapi-community/strapi-provider-upload-google-cloud-storage@5.0.5` declares
+`engines.node: ">=18.0.0 <=22.x.x"`. Projects on Node.js 24 or 26 with strict engine checks
+(`npm install --engine-strict`, or Yarn 1, which enforces `engines` by default) fail with
+`EBADENGINE`, even though Strapi 5 supports those Node versions. Publishing the package under a
+separate scope let those projects install it while the change went through upstream review.
+
+Upstream has since merged
+[PR #220](https://github.com/strapi-community/strapi-provider-upload-google-cloud-storage/pull/220),
+which sets `engines.node` to `>=22.20.0 <=26.x.x`. My earlier
+[PR #219](https://github.com/strapi-community/strapi-provider-upload-google-cloud-storage/pull/219)
+was closed as superseded. The change is on upstream `master` but not yet in a published npm release;
+until it is, this fork remains available for Node.js 24 projects.
+
+The provider implementation is kept identical to upstream. Any functional change should be proposed
+upstream first; a fork should only be maintained for a change that cannot be accepted there.
 
 ## Differences from upstream
 
+- `engines.node` is `>=20.0.0 <=24.x.x` instead of `>=18.0.0 <=22.x.x` (published upstream 5.0.5).
+  Upstream `master` has already moved to `>=22.20.0 <=26.x.x`.
 - npm package name and scope: `@davideddr/strapi-provider-upload-google-cloud-storage`.
 - `provider` value in the Strapi configuration uses the fork name.
 - README includes the fork notice, requirements and support information.

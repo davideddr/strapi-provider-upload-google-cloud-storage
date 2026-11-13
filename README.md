@@ -8,6 +8,10 @@
 > The original project is the one linked above; please report bugs of this fork on the
 > [fork issue tracker](https://github.com/davideddr/strapi-provider-upload-google-cloud-storage/issues).
 >
+> **Status**: temporary workaround for the Node.js engine range. Upstream has already merged Node
+> 24/26 support ([PR #220](https://github.com/strapi-community/strapi-provider-upload-google-cloud-storage/pull/220));
+> this fork will be deprecated once that change is published on npm.
+>
 > See [FORK.md](FORK.md) for the differences from upstream, the versioning rules and the sync process.
 
 <div align="center">

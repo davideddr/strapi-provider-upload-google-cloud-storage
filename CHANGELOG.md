@@ -4,6 +4,14 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Changed
+
+- Documented that the fork is a temporary workaround for the Node.js engine range. Upstream has
+  merged Node 24/26 support (PR #220) and this fork will be deprecated once that change is published
+  on npm. The fork was withdrawn from the Strapi provider submission.
+
 ## [5.0.5] - 2026-11-13
 
 First stable release of the fork, based on upstream `v5.0.5`.
