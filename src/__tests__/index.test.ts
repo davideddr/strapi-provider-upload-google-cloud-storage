@@ -660,7 +660,7 @@ describe('Provider', () => {
           'Either:\n' +
           '1. Provide serviceAccount with client_email and private_key in your configuration, or\n' +
           '2. Set publicFiles to true to use direct URLs instead of signed URLs.\n' +
-          'For more information, see: https://github.com/strapi-community/strapi-provider-upload-google-cloud-storage#setting-up-google-authentication'
+          'For more information, see: https://github.com/davideddr/strapi-provider-upload-google-cloud-storage#setting-up-google-authentication'
       );
 
       expect(mockedStorage.bucket).toHaveBeenCalled();

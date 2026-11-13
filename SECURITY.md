@@ -1,38 +1,27 @@
 # Security Policy
 
-Strapi V5 is now release, please use release >= 5.0.0
-For old version, please refer to older release.
+This is the security policy of the **fork**
+`@davideddr/strapi-provider-upload-google-cloud-storage`.
+
+For the original package, refer to the
+[upstream security policy](https://github.com/strapi-community/strapi-provider-upload-google-cloud-storage/blob/master/SECURITY.md).
 
 ## Supported Versions
 
+Security fixes are provided for the latest published version of the fork.
+
 | Version | Supported          |
-|---------|--------------------|
-| 5.12.5  | :white_check_mark: |
-| 5.0.0   | :white_check_mark: |
-| 4.10.5  | :x:                |
-| 4.10.2  | :x:                |
-| 4.10.1  | :x:                |
-| 4.6.1   | :x:                |
-| 4.5.6   | :x:                |
-| 4.3.6   | :x:                |
-| 4.2.3   | :x:                |
-| 4.1.7   | :x:                |
-| 4.0.0   | :x:                |
-| 3.6.8   | :x:                |
-| 3.6.5   | :x:                |
-| 3.6.3   | :x:                |
-| 3.6.2   | :x:                |
-| 3.4.6   | :x:                |
-| 3.1.6   | :x:                |
-| 3.1.5   | :x:                |
-| 3.1.4   | :x:                |
-| 3.0.x   | :x:                |
+| ------- | ------------------ |
+| 5.0.x   | :white_check_mark: |
+| < 5.0   | :x:                |
 
 ## Reporting a Vulnerability
 
-Please report (suspected) security vulnerabilities to **[security@amykron.com](mailto:security@amykron.com)** via the Strapi Slack.
+Please do not open a public issue for security vulnerabilities.
 
-When reporting a (suspected) security vulnerability via slack please reach out to me directly:
-- `@Lith` (/!\ not Strapi employee /!\)
+Report them privately via the
+[fork security advisories](https://github.com/davideddr/strapi-provider-upload-google-cloud-storage/security/advisories/new)
+or by email to [davide.darech@gmail.com](mailto:davide.darech@gmail.com).
 
-You will receive a response from me within 48h (depending week-end, day off...).
+You will receive a response as soon as possible. If the vulnerability also affects the upstream
+package, please report it to the upstream maintainers as well.

@@ -1,0 +1,57 @@
+name: Publish to npm
+
+# Publishes to npm when a tag `fork-vX.Y.Z` is pushed. The tag must match the
+# version in package.json. Upstream tags (`vX.Y.Z`) are intentionally ignored.
+on:
+  push:
+    tags: ['fork-v*']
+
+permissions:
+  contents: write # GitHub Release
+  id-token: write # npm provenance
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+          registry-url: https://registry.npmjs.org
+
+      - name: Tag must match package.json
+        run: |
+          EXPECTED="fork-v$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_REF_NAME" != "$EXPECTED" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $EXPECTED"
+            exit 1
+          fi
+
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn build:prod
+      - run: yarn test:unit:ci
+      - name: Check the package contents
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Extract release notes from CHANGELOG.md
+        run: |
+          VERSION="${GITHUB_REF_NAME#fork-v}"
+          awk -v v="$VERSION" '
+            $0 ~ "^## \\[" v "\\]" {found=1; next}
+            found && /^## \[/ {exit}
+            found {print}
+          ' CHANGELOG.md > release-notes.md
+          test -s release-notes.md || echo "See CHANGELOG.md" > release-notes.md
+
+      - name: GitHub Release
+        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --notes-file release-notes.md
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
